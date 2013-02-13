@@ -13,6 +13,7 @@
 #import "ImagePickerViewController.h"
 
 #import "PopOverDelegate.h"
+#import "TextHistoryDelegate.h"
 
 @interface ViewController ()
 {
@@ -20,9 +21,13 @@
 }
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
 @property (assign, nonatomic, getter=isPlusMenuActive) BOOL plusMenuActive;
 @property (nonatomic, retain) WEPopoverController* menuPopoverController;
 @property (nonatomic, retain) PopOverDelegate* popOverDelegate;
+//@property (nonatomic, retain) TextHistoryDelegate* textHistoryDelegate;
+// If I don't retain this, it seems to go away immediately.
+@property (retain, nonatomic) IBOutlet TextHistoryDelegate *textHistoryDelegate;
 
 
 @property (weak, nonatomic) IBOutlet UIView* myCanvasView;
@@ -41,9 +46,10 @@
 	UINib *cellNib_end = [UINib nibWithNibName:@"MessageCellEnd" bundle:nil];
 	[self.collectionView registerNib:cellNib_end forCellWithReuseIdentifier:@"MessageCellEnd"];
 	
-	
 	[self.collectionView setAllowsSelection:YES];
-	[[self collectionView] setDelegate:self];
+	[[self textHistoryDelegate] setMyCanvasView:[self myCanvasView]];
+//	[self setTextHistoryDelegate:[[TextHistoryDelegate alloc] init]];
+//	[[self collectionView] setDelegate:[self textHistoryDelegate]];
 	
     // Initialize recipe image array
 /*
@@ -67,67 +73,6 @@
 	_collectionViewDelegate = the_delegate;
 }
  */
-
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-//    return recipeImages.count;
-	// I'm confused; the order is backwards from what I thought it would be.
-	if(section == 0)
-	{
-		return 1;
-	}
-	else if(section == 1)
-	{
-		return 2;
-	}
-	else
-	{
-		return 0;
-	}
-}
-
-
-- (NSInteger)numberOfSectionsInCollectionView: (UICollectionView *)collectionView {
-    return 2;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-	NSLog(@"indexPath: %@, %d", indexPath, [indexPath indexAtPosition:1]);
-    static NSString *identifier = @"MessageCell";
-    static NSString *identifierend = @"MessageCellEnd";
-    
- //   UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-	UICollectionViewCell* cell;
-	if([indexPath indexAtPosition:1] == 1)
-	{
-		cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifierend forIndexPath:indexPath];
-		MessageCell* message_cell = (MessageCell*)cell;
-		UIImageView* image_view = [message_cell imageView];
-		image_view.image = [UIImage imageNamed:@"hamburger.jpg"];
-
-
-	}
-	else
-	{
-		cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-		MessageCell* message_cell = (MessageCell*)cell;
-		UIImageView* image_view = [message_cell imageView];
-		image_view.image = [UIImage imageNamed:@"egg_benedict.jpg"];
-
-	}
-	
-    /*
-    UIImageView *recipeImageView = (UIImageView *)[cell viewWithTag:100];
-    recipeImageView.image = [UIImage imageNamed:[recipeImages objectAtIndex:indexPath.row]];
-	//    cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photo-frame.png"]];
-    */
-	
-    return cell;
-}
-
-
-
-
 
 
 - (IBAction) onPlusPress:(id)the_sender
