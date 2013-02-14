@@ -49,6 +49,16 @@
 		0055596216C9D8D2004ADF31 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0055596116C9D8D2004ADF31 /* MessageCell.xib */; };
 		0055596516C9DAC8004ADF31 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0055596416C9DAC8004ADF31 /* MessageCell.m */; };
 		00D8317716CBB1420005AC24 /* ImagePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0019F59F16CA0DE300E2F600 /* ImagePickerViewController.xib */; };
+		00F94EB516CC6DF500D9506C /* Simperium.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F94EB416CC6DF400D9506C /* Simperium.framework */; };
+		00F94EB816CC6E0F00D9506C /* LoginView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00F94EB716CC6E0F00D9506C /* LoginView.xib */; };
+		00F94EBA16CC6E4000D9506C /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F94EB916CC6E4000D9506C /* CoreData.framework */; };
+		00F94EBC16CC6E4700D9506C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F94EBB16CC6E4700D9506C /* SystemConfiguration.framework */; };
+		00F94EBE16CC6E5100D9506C /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F94EBD16CC6E5100D9506C /* MobileCoreServices.framework */; };
+		00F94EC016CC6E5900D9506C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F94EBF16CC6E5900D9506C /* CFNetwork.framework */; };
+		00F94EC216CC6E6B00D9506C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F94EC116CC6E6B00D9506C /* libz.dylib */; };
+		00F94EC416CC6E7500D9506C /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F94EC316CC6E7500D9506C /* libicucore.dylib */; };
+		00F94EC616CC6F0000D9506C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00F94EC516CC6F0000D9506C /* Security.framework */; };
+		00F94F0C16CC723200D9506C /* ChatScroll.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 00F94F0A16CC723100D9506C /* ChatScroll.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +121,16 @@
 		0055596116C9D8D2004ADF31 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		0055596316C9DAC8004ADF31 /* MessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		0055596416C9DAC8004ADF31 /* MessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
+		00F94EB416CC6DF400D9506C /* Simperium.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Simperium.framework; sourceTree = "<group>"; };
+		00F94EB716CC6E0F00D9506C /* LoginView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginView.xib; sourceTree = "<group>"; };
+		00F94EB916CC6E4000D9506C /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		00F94EBB16CC6E4700D9506C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		00F94EBD16CC6E5100D9506C /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		00F94EBF16CC6E5900D9506C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		00F94EC116CC6E6B00D9506C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		00F94EC316CC6E7500D9506C /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		00F94EC516CC6F0000D9506C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		00F94F0B16CC723100D9506C /* ChatScroll.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChatScroll.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,9 +138,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00F94EC616CC6F0000D9506C /* Security.framework in Frameworks */,
+				00F94EC416CC6E7500D9506C /* libicucore.dylib in Frameworks */,
+				00F94EC216CC6E6B00D9506C /* libz.dylib in Frameworks */,
+				00F94EC016CC6E5900D9506C /* CFNetwork.framework in Frameworks */,
+				00F94EBE16CC6E5100D9506C /* MobileCoreServices.framework in Frameworks */,
+				00F94EBC16CC6E4700D9506C /* SystemConfiguration.framework in Frameworks */,
+				00F94EBA16CC6E4000D9506C /* CoreData.framework in Frameworks */,
 				0055593816C9D20F004ADF31 /* UIKit.framework in Frameworks */,
 				0055593A16C9D20F004ADF31 /* Foundation.framework in Frameworks */,
 				0055593C16C9D20F004ADF31 /* CoreGraphics.framework in Frameworks */,
+				00F94EB516CC6DF500D9506C /* Simperium.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +175,14 @@
 		0055593616C9D20F004ADF31 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00F94EC316CC6E7500D9506C /* libicucore.dylib */,
+				00F94EC116CC6E6B00D9506C /* libz.dylib */,
+				00F94EC516CC6F0000D9506C /* Security.framework */,
+				00F94EBF16CC6E5900D9506C /* CFNetwork.framework */,
+				00F94EBD16CC6E5100D9506C /* MobileCoreServices.framework */,
+				00F94EBB16CC6E4700D9506C /* SystemConfiguration.framework */,
+				00F94EB916CC6E4000D9506C /* CoreData.framework */,
+				00F94EB416CC6DF400D9506C /* Simperium.framework */,
 				0055593716C9D20F004ADF31 /* UIKit.framework */,
 				0055593916C9D20F004ADF31 /* Foundation.framework */,
 				0055593B16C9D20F004ADF31 /* CoreGraphics.framework */,
@@ -187,6 +223,8 @@
 				0019F57416CA04E700E2F600 /* TextHistoryDelegate.m */,
 				002B32CC16CA2335009E6515 /* PopOverDelegate.h */,
 				002B32CD16CA2335009E6515 /* PopOverDelegate.m */,
+				00F94EB716CC6E0F00D9506C /* LoginView.xib */,
+				00F94F0A16CC723100D9506C /* ChatScroll.xcdatamodeld */,
 			);
 			path = ChatScroll;
 			sourceTree = "<group>";
@@ -301,6 +339,7 @@
 				0019F59C16CA0DCE00E2F600 /* noodle_with_bbq_pork.jpg in Resources */,
 				00D8317716CBB1420005AC24 /* ImagePickerViewController.xib in Resources */,
 				002B32CA16CA1D6C009E6515 /* ImageViewCell.xib in Resources */,
+				00F94EB816CC6E0F00D9506C /* LoginView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +362,7 @@
 				0019F5AD16CA15A000E2F600 /* ImagePickerViewController.m in Sources */,
 				002B32C916CA1D6C009E6515 /* ImageViewCell.m in Sources */,
 				002B32CE16CA2336009E6515 /* PopOverDelegate.m in Sources */,
+				00F94F0C16CC723200D9506C /* ChatScroll.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,9 +450,14 @@
 		0055595B16C9D20F004ADF31 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatScroll/ChatScroll-Prefix.pch";
 				INFOPLIST_FILE = "ChatScroll/ChatScroll-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -421,9 +466,14 @@
 		0055595C16C9D20F004ADF31 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ChatScroll/ChatScroll-Prefix.pch";
 				INFOPLIST_FILE = "ChatScroll/ChatScroll-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -451,6 +501,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		00F94F0A16CC723100D9506C /* ChatScroll.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				00F94F0B16CC723100D9506C /* ChatScroll.xcdatamodel */,
+			);
+			currentVersion = 00F94F0B16CC723100D9506C /* ChatScroll.xcdatamodel */;
+			path = ChatScroll.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0055592A16C9D20F004ADF31 /* Project object */;
 }
