@@ -53,6 +53,8 @@
 						   context:[self managedObjectContext]
 					   coordinator:[self persistentStoreCoordinator]];
 	
+	[[self viewController] setManagedObjectContext:[self managedObjectContext]];
+	
 	
 	
     [self.window makeKeyAndVisible];
