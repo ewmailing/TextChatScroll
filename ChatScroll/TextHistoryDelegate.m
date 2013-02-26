@@ -45,9 +45,9 @@ static NSString * kAssociatedMessageCellForSubmitButton = @"kAssociatedMessageCe
 
 		id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
 		NSUInteger number_of_objects = [sectionInfo numberOfObjects];
-		return number_of_objects;
 		 */
-		return [self.fetchedResultsController.fetchedObjects count];
+		NSUInteger number_of_objects = [self.fetchedResultsController.fetchedObjects count];
+		return number_of_objects;
 
 	}
 	else
@@ -73,7 +73,7 @@ static NSString * kAssociatedMessageCellForSubmitButton = @"kAssociatedMessageCe
 	[text_view setText:message_body];
 	
 	[self insertNewObject:the_sender messageBody:message_body messageOrder:counter++];
-
+	self.fetchedResultsController = nil;
 	[[self collectionView] reloadData];
 	
 }
