@@ -8,8 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface TextHistoryDelegate : NSObject  <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface TextHistoryDelegate : NSObject  <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIView* myCanvasView;
+@property (weak, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (weak, nonatomic) UICollectionView* collectionView;
 
 @end

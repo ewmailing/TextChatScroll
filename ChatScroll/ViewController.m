@@ -51,6 +51,10 @@
 	
 	[self.collectionView setAllowsSelection:YES];
 	[[self textHistoryDelegate] setMyCanvasView:[self myCanvasView]];
+	NSManagedObjectContext* managed_object_context = [self managedObjectContext];
+	[[self textHistoryDelegate] setManagedObjectContext:managed_object_context];
+	[[self textHistoryDelegate] setCollectionView:self.collectionView];
+
 //	[self setTextHistoryDelegate:[[TextHistoryDelegate alloc] init]];
 //	[[self collectionView] setDelegate:[self textHistoryDelegate]];
 	

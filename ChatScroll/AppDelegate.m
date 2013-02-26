@@ -47,13 +47,18 @@
 	self.simperium = [[Simperium alloc] initWithRootViewController:
 					  self.window.rootViewController];
 	
-    [self.simperium startWithAppID:@"downgrades-hatchets-7f8"
-							APIKey:@"caf03ec047764168b9d836492cffaebb"
+	
+	
+//    [self.simperium startWithAppID:@"downgrades-hatchets-7f8"
+//							APIKey:@"caf03ec047764168b9d836492cffaebb"
+	 [self.simperium startWithAppID:@"misses-itineraries-64a"
+							 APIKey:@"f38fcdd637c047efaeb0f2bb6f6967d5"
 							 model:[self managedObjectModel]
 						   context:[self managedObjectContext]
 					   coordinator:[self persistentStoreCoordinator]];
-	
-	[[self viewController] setManagedObjectContext:[self managedObjectContext]];
+	NSManagedObjectContext* managed_object_context = [self managedObjectContext];
+
+	[[self viewController] setManagedObjectContext:managed_object_context];
 	
 	
 	
