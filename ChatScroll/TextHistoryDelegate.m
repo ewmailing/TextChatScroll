@@ -15,11 +15,13 @@
 #import "PopOverDelegate.h"
 #import <objc/runtime.h>
 static NSString * kAssociatedMessageCellForSubmitButton = @"kAssociatedMessageCellForSubmitButton";
+static NSString * kAssociatedEntityForEditButton = @"kAssociatedEntityForEditButton";
 
 @interface TextHistoryDelegate ()
 @property (nonatomic, retain) WEPopoverController* menuPopoverController;
 @property (nonatomic, retain) PopOverDelegate* popOverDelegate;
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (assign, nonatomic) NSInteger messageOrderCounter;
 
 @end
 @implementation TextHistoryDelegate
@@ -63,7 +65,6 @@ static NSString * kAssociatedMessageCellForSubmitButton = @"kAssociatedMessageCe
 
 - (IBAction) onEndCellSubmit:(id)the_sender
 {
-	static NSInteger counter = 1;
 	
 	NSLog(@"%@", NSStringFromSelector(_cmd));
 	MessageCell* message_cell = (MessageCell *)objc_getAssociatedObject(the_sender, &kAssociatedMessageCellForSubmitButton);
@@ -72,14 +73,17 @@ static NSString * kAssociatedMessageCellForSubmitButton = @"kAssociatedMessageCe
 	NSString* message_body = [text_view text];
 	[text_view setText:message_body];
 	
-	[self insertNewObject:the_sender messageBody:message_body messageOrder:counter++];
-	self.fetchedResultsController = nil;
-	[[self collectionView] reloadData];
-	
+	[self insertNewObject:the_sender messageBody:message_body messageOrder:[self messageOrderCounter]];
+	[self setMessageOrderCounter:[self messageOrderCounter]+1];
 }
 - (IBAction) onHistoryCellSubmit:(id)the_sender
 {
 	NSLog(@"%@", NSStringFromSelector(_cmd));
+	NSManagedObject* managed_object = (NSManagedObject *)objc_getAssociatedObject(the_sender, &kAssociatedEntityForEditButton);
+
+	NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+	[context deleteObject:managed_object];
+	
 	
 }
 
@@ -142,6 +146,11 @@ static NSString * kAssociatedMessageCellForSubmitButton = @"kAssociatedMessageCe
 		[submit_button addTarget:self action:@selector(onHistoryCellSubmit:) forControlEvents:UIControlEventTouchUpInside];
 		
 		[self configureCell:message_cell atIndexPath:indexPath];
+		
+
+		NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
+		objc_setAssociatedObject(submit_button, &kAssociatedEntityForEditButton, object,
+								 OBJC_ASSOCIATION_RETAIN);
 
 	}
 	
@@ -277,7 +286,7 @@ static NSString * kAssociatedMessageCellForSubmitButton = @"kAssociatedMessageCe
     [fetchRequest setFetchBatchSize:20];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"messageOrder" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"messageOrder" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
@@ -289,13 +298,19 @@ static NSString * kAssociatedMessageCellForSubmitButton = @"kAssociatedMessageCe
     self.fetchedResultsController = aFetchedResultsController;
     
 	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
+	if (![_fetchedResultsController performFetch:&error]) {
 		// Replace this implementation with code to handle the error appropriately.
 		// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
     
+	NSManagedObject* object = [[_fetchedResultsController fetchedObjects] lastObject];
+	NSNumber* number = [object valueForKey:@"messageOrder"];
+	[self setMessageOrderCounter:[number integerValue]+1];
+
+	
+	
     return _fetchedResultsController;
 }
 
@@ -326,22 +341,22 @@ static NSString * kAssociatedMessageCellForSubmitButton = @"kAssociatedMessageCe
 	
 }
 
-/*
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.collectionView beginUpdates];
+//    [self.collectionView beginUpdates];
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {
+
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+//            [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+//            [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
@@ -354,29 +369,32 @@ static NSString * kAssociatedMessageCellForSubmitButton = @"kAssociatedMessageCe
     
     switch(type) {
         case NSFetchedResultsChangeInsert:
-            [collectionView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+//            [collectionView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeDelete:
-            [collectionView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//            [collectionView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:[collectionView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+//            [self configureCell:[collectionView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
-            [collectionView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [collectionView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+//            [collectionView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//            [collectionView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.collectionView endUpdates];
+//    [self.collectionView endUpdates];
+	
+	self.fetchedResultsController = nil;
+	[[self collectionView] reloadData];
+
 }
 
-*/
 
 @end
