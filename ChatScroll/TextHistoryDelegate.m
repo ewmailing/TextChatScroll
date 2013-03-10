@@ -83,14 +83,29 @@ static NSString * kAssociatedEntityForEditButton = @"kAssociatedEntityForEditBut
 
 	
 }
+
+- (void) deleteObject:(NSManagedObject*)managed_object
+{
+	
+	NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+	[context deleteObject:managed_object];
+	
+	// Save the context.
+	NSError *error = nil;
+	if (![context save:&error]) {
+		// Replace this implementation with code to handle the error appropriately.
+		// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	}
+
+}
 - (IBAction) onHistoryCellSubmit:(id)the_sender
 {
 	NSLog(@"%@", NSStringFromSelector(_cmd));
 	NSManagedObject* managed_object = (NSManagedObject *)objc_getAssociatedObject(the_sender, &kAssociatedEntityForEditButton);
 
-	NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-	[context deleteObject:managed_object];
-	
+	[self deleteObject:managed_object];
 	
 }
 
@@ -300,12 +315,13 @@ static NSString * kAssociatedEntityForEditButton = @"kAssociatedEntityForEditBut
     
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+//    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
     aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
 	NSError *error = nil;
-	if (![_fetchedResultsController performFetch:&error]) {
+	if (![aFetchedResultsController performFetch:&error]) {
 		// Replace this implementation with code to handle the error appropriately.
 		// abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
