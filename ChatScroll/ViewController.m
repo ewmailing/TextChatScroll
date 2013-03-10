@@ -15,6 +15,8 @@
 #import "PopOverDelegate.h"
 #import "TextHistoryDelegate.h"
 
+#import "ChatPusher.h"
+#import "PTPusher.h"
 
 @interface ViewController ()
 {
@@ -34,6 +36,8 @@
 @property (weak, nonatomic) IBOutlet UIView* myCanvasView;
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) PTPusher* chatPusher;
+@property (strong, nonatomic) PTPusherPrivateChannel* chatPusherChannel;
 
 @end
 
@@ -55,6 +59,17 @@
 	[[self textHistoryDelegate] setManagedObjectContext:managed_object_context];
 	[[self textHistoryDelegate] setCollectionView:self.collectionView];
 
+
+	
+	PTPusher* chatpusher = [[ChatPusher sharedInstance] pusherInstance];
+	PTPusherPrivateChannel* pusher_channel = [chatpusher subscribeToPrivateChannelNamed:@"ChatTestChannel0"];
+	[[self textHistoryDelegate] setChatPusher:chatpusher];
+	[[self textHistoryDelegate] setChatPusherChannel:pusher_channel];
+	_chatPusher = chatpusher;
+	_chatPusherChannel = pusher_channel;
+
+
+	
 //	[self setTextHistoryDelegate:[[TextHistoryDelegate alloc] init]];
 //	[[self collectionView] setDelegate:[self textHistoryDelegate]];
 	

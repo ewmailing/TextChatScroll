@@ -9,6 +9,7 @@
 #import "ImagePickerViewController.h"
 //#import "ImageViewCell.h"
 
+
 @interface ImagePickerViewController ()
 {
 	NSArray *recipeImages;
@@ -41,7 +42,7 @@
 	UINib *cellNib = [UINib nibWithNibName:@"ImageViewCell" bundle:nil];
 	[self.pickerCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"ImageCell"];
 	[[self pickerCollectionView] setDataSource:self];
-
+	
 	/* uncomment this block to use subclassed cells */
 //    [self.pickerCollectionView registerClass:[ImageViewCell class] forCellWithReuseIdentifier:@"ImageCell"];
     /* end of subclass-based cells block */

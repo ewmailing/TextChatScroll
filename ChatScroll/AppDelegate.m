@@ -10,17 +10,19 @@
 
 #import <CoreData/CoreData.h>
 
-#import <Simperium/Simperium.h>
 
 #import "ViewController.h"
+#import "PTPusher.h"
+#import "PusherDelegate.h"
+#import "ChatPusher.h"
 
 @interface AppDelegate ()
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (strong, nonatomic) Simperium *simperium;
-
+@property(strong, nonatomic) PTPusher* pusherClient;
+@property(strong, nonatomic) PusherDelegate* pusherDelegate;
 @end
 
 @implementation AppDelegate
@@ -44,23 +46,19 @@
 	
 	self.window.rootViewController = self.viewController;
 	
-	self.simperium = [[Simperium alloc] initWithRootViewController:
-					  self.window.rootViewController];
-	
-	
-	
-//    [self.simperium startWithAppID:@"downgrades-hatchets-7f8"
-//							APIKey:@"caf03ec047764168b9d836492cffaebb"
-	 [self.simperium startWithAppID:@"misses-itineraries-64a"
-							 APIKey:@"f38fcdd637c047efaeb0f2bb6f6967d5"
-							 model:[self managedObjectModel]
-						   context:[self managedObjectContext]
-					   coordinator:[self persistentStoreCoordinator]];
 	NSManagedObjectContext* managed_object_context = [self managedObjectContext];
 
 	[[self viewController] setManagedObjectContext:managed_object_context];
 	
-	
+	// initialize/connect
+	[ChatPusher sharedInstance];
+/*
+	_pusherDelegate = [[PusherDelegate alloc] init];
+	// Probably should turn on encryption for shipping?
+	_pusherClient = [PTPusher pusherWithKey:@"c469725779f600fe938d" delegate:_pusherDelegate encrypted:NO];
+
+	[_pusherClient connect];
+*/
 	
     [self.window makeKeyAndVisible];
     return YES;

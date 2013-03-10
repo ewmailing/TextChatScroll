@@ -13,6 +13,9 @@
 #import "WEPopoverContainerView.h"
 #import "ImagePickerViewController.h"
 #import "PopOverDelegate.h"
+
+#import "PTPusherChannel.h"
+
 #import <objc/runtime.h>
 static NSString * kAssociatedMessageCellForSubmitButton = @"kAssociatedMessageCellForSubmitButton";
 static NSString * kAssociatedEntityForEditButton = @"kAssociatedEntityForEditButton";
@@ -75,6 +78,10 @@ static NSString * kAssociatedEntityForEditButton = @"kAssociatedEntityForEditBut
 	
 	[self insertNewObject:the_sender messageBody:message_body messageOrder:[self messageOrderCounter]];
 	[self setMessageOrderCounter:[self messageOrderCounter]+1];
+	
+	[[self chatPusherChannel] triggerEventNamed:@"AddMessage" data:message_body];
+
+	
 }
 - (IBAction) onHistoryCellSubmit:(id)the_sender
 {
